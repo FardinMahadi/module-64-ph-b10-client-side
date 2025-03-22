@@ -3,7 +3,7 @@ import bgImg from "../../../assets/home/chef-service.jpg";
 const Details = () => {
   return (
     <section
-      className="sm:w-10/12 mx-auto py-10 bg-cover bg-center"
+      className="sm:w-10/12 mx-auto py-10 bg-cover bg-center bg-fixed"
       style={{ backgroundImage: `url(${bgImg})` }}
     >
       <div className="relative flex items-center justify-center bg-white bg-opacity-75 text-black text-center w-10/12 mx-auto py-10">

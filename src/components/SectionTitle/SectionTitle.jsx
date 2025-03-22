@@ -5,7 +5,7 @@ const SectionTitle = ({ heading, subHeading }) => {
         ---{subHeading}---
       </p>
       <div className="divider "></div>
-      <h3 className="text-2xl sm:text-4xldivider-neutral mx-12 uppercase">
+      <h3 className="text-5xl sm:text-4xldivider-neutral mx-12 uppercase">
         {heading}
       </h3>
       <div className="divider"></div>
