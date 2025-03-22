@@ -1,7 +1,10 @@
 import Banner from "../Banner/Banner";
+import CallUs from "../CallUs/CallUs";
 import Category from "../Category/Category";
 import Details from "../Details/Details";
+import Featured from "../Featured/Featured";
 import PopularMenu from "../PopularMenu/PopularMenu";
+import Testimonial from "../Testimonial/Testimonial";
 
 const Home = () => {
   return (
@@ -10,10 +13,9 @@ const Home = () => {
       <Category></Category>
       <Details></Details>
       <PopularMenu></PopularMenu>
-      {/* call section */}
-      <section className="text-center py-16 bg-black text-white text-3xl font-mono w-10/12 mx-auto my-12">
-        <h3>Call Us: +88 0192345678910</h3>
-      </section>
+      <CallUs></CallUs>
+      <Featured></Featured>
+      <Testimonial></Testimonial>
     </div>
   );
 };
