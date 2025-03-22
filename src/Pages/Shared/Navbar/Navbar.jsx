@@ -1,21 +1,13 @@
+import { Link } from "react-router-dom";
+
 const Navbar = () => {
   const navOptions = (
     <>
       <li>
-        <a>Item 1</a>
+        <Link to="/">Home</Link>
       </li>
       <li>
-        <details>
-          <summary>Parent</summary>
-          <ul className="p-2">
-            <li>
-              <a>Submenu 1</a>
-            </li>
-            <li>
-              <a>Submenu 2</a>
-            </li>
-          </ul>
-        </details>
+        <Link to="/menu">Our Menu</Link>
       </li>
       <li>
         <a>Item 3</a>
@@ -51,7 +43,9 @@ const Navbar = () => {
               {navOptions}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">Bistro Boss</a>
+          <a className="btn btn-ghost text-xl uppercase font-mono">
+            Bistro Boss <br /> Restaurant
+          </a>
         </div>
         {/* large screen */}
         <div className="navbar-center hidden lg:flex">
