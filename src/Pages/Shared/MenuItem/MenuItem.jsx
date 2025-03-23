@@ -1,7 +1,7 @@
 const MenuItem = ({ item }) => {
   const { name, image, price, recipe } = item;
   return (
-    <div className="flex items-center space-x-4">
+    <div className="flex items-center space-x-4 cursor-pointer">
       <img
         style={{ borderRadius: "0 200px 200px 200px" }}
         className="w-[100px] aspect-square object-cover"

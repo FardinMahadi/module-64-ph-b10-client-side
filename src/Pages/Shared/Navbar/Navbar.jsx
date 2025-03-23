@@ -10,7 +10,10 @@ const Navbar = () => {
         <Link to="/menu">Our Menu</Link>
       </li>
       <li>
-        <a>Item 3</a>
+        <Link to="/order/salad">Order Food</Link>
+      </li>
+      <li>
+        <Link to="/login">Login</Link>
       </li>
     </>
   );
@@ -43,8 +46,9 @@ const Navbar = () => {
               {navOptions}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl uppercase font-mono">
-            Bistro Boss <br /> Restaurant
+          <a className="uppercase font-cinzel flex flex-col items-center p-2">
+            <span className="text-2xl font-bold">Bistro Boss</span>
+            <span className="text-xl">Restaurant</span>
           </a>
         </div>
         {/* large screen */}
