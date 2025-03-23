@@ -3,25 +3,44 @@ import authPng from "../../../assets/others/authentication2.png";
 
 import { FaFacebookF, FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import { useContext } from "react";
 import { AuthContext } from "../../../provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
     console.log(data);
     createUser(data.email, data.password).then((result) => {
       const loggedUser = result.user;
       console.log(loggedUser);
+      updateUserProfile(data.name, data.photoURL)
+        .then(() => {
+          console.log("user profile info updated");
+          reset();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "User profile updated",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate("/");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     });
   };
 
@@ -69,6 +88,17 @@ const SignUp = () => {
                 {errors.email && (
                   <span className="text-red-500">Email required</span>
                 )}
+
+                <label className="fieldset-label text-black font-bold">
+                  Photo URL
+                </label>
+                <input
+                  type="text"
+                  {...register("photoURL")}
+                  name="photoURL"
+                  className="input bg-white text-black"
+                  placeholder="Type your photo URL"
+                />
 
                 <label className="fieldset-label text-black font-bold">
                   Password
