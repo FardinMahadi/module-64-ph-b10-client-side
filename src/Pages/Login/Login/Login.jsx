@@ -6,11 +6,18 @@ import {
   LoadCanvasTemplate,
   validateCaptcha,
 } from "react-simple-captcha";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { FaFacebookF, FaGithub } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
+import { AuthContext } from "../../../provider/AuthProvider";
+import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const captchaRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
+
+  const { user, loading, signIn } = useContext(AuthContext);
 
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -22,6 +29,11 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
+
+    signIn(email, password).then((result) => {
+      const user = result.user;
+      console.log(user);
+    });
   };
 
   const handleValidateCaptcha = () => {
@@ -35,66 +47,102 @@ const Login = () => {
   };
 
   return (
-    <div
-      className="hero bg-base-200 min-h-screen text-black"
-      style={{ backgroundImage: `url(${bgTexture})` }}
-    >
-      <div className="hero-content flex-col lg:flex-row w-full lg:w-10/12 p-10 shadow-2xl">
-        <div className="text-center lg:text-left">
-          <img className="w-2/3 mx-auto" src={authPng} />
-        </div>
-        <div className="card w-full max-w-sm shrink-0">
-          <form onSubmit={handleLogin} className="card-body">
-            <h1 className="text-5xl font-bold text-center">Login</h1>
-            <fieldset className="fieldset">
-              <label className="fieldset-label">Email</label>
-              <input
-                type="email"
-                name="email"
-                className="input bg-white text-black"
-                placeholder="Email"
-              />
-              <label className="fieldset-label">Password</label>
-              <input
-                type="password"
-                name="password"
-                className="input bg-white text-black"
-                placeholder="Password"
-              />
-              <div>
-                <a className="link link-hover">Forgot password?</a>
-              </div>
+    <>
+      <Helmet>
+        <title>Bistro Boss | Login</title>
+      </Helmet>
+      <div
+        className="hero bg-base-200 min-h-screen text-black"
+        style={{ backgroundImage: `url(${bgTexture})` }}
+      >
+        <div className="hero-content flex-col lg:flex-row w-full lg:w-10/12 p-10 shadow-2xl">
+          <div className="text-center lg:text-left">
+            <img className="w-2/3 mx-auto" src={authPng} />
+          </div>
+          <div className="card w-full max-w-sm shrink-0">
+            <form onSubmit={handleLogin} className="card-body">
+              <h1 className="text-5xl font-bold text-center">Login</h1>
+              <fieldset className="fieldset">
+                <label className="fieldset-label text-black font-bold">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  className="input bg-white text-black"
+                  placeholder="Email"
+                />
+                <label className="fieldset-label text-black font-bold">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  name="password"
+                  className="input bg-white text-black"
+                  placeholder="Password"
+                />
+                <div>
+                  <a className="link link-hover">Forgot password?</a>
+                </div>
 
-              {/* simple captcha */}
-              <label className="fieldset-label">
-                <LoadCanvasTemplate />
-              </label>
-              <input
-                type="text"
-                ref={captchaRef}
-                name="captcha"
-                className="input bg-white text-black"
-                placeholder="Type The Captcha Above"
-              />
-              <button
-                onClick={handleValidateCaptcha}
-                className="btn btn-outline btn-xs mt-2"
-              >
-                Validate
+                {/* simple captcha */}
+                <label className="fieldset-label">
+                  <LoadCanvasTemplate />
+                </label>
+                <input
+                  type="text"
+                  ref={captchaRef}
+                  name="captcha"
+                  className="input bg-white text-black"
+                  placeholder="Type The Captcha Above"
+                />
+                <button
+                  onClick={handleValidateCaptcha}
+                  className="btn btn-outline btn-xs mt-2"
+                >
+                  Validate
+                </button>
+
+                <input
+                  type="submit"
+                  className={`btn btn-primary mt-4 shadow-yellow-500 ${
+                    disabled ? "btn-disabled text-gray-400" : "bg-yellow-500"
+                  }`}
+                  value="Login"
+                />
+              </fieldset>
+            </form>
+
+            <div className="grid gap-2 grid-cols-3 w-11/12 mx-auto">
+              {/* Google */}
+              <button className="btn bg-white text-black border-[#e5e5e5] ">
+                <FcGoogle />
               </button>
 
-              <input
-                type="submit"
-                className={`btn btn-primary mt-4 shadow-yellow-500 ${
-                  disabled ? "btn-disabled text-gray-400" : "bg-yellow-500"
-                }`}
-                value="Login"
-              />
-            </fieldset>
-          </form>
+              {/* Facebook */}
+              <button className="btn bg-[#1A77F2] text-white border-[#005fd8]">
+                <FaFacebookF />
+              </button>
+
+              {/* GitHub */}
+              <button className="btn bg-black text-white border-black">
+                <FaGithub />
+              </button>
+            </div>
+
+            {/* Redirect to Sign In Page */}
+            <div className="text-center mt-4">
+              <p>
+                Don't have an account?{" "}
+                <Link to="/signup" className="text-blue-500 underline">
+                  Sign In
+                </Link>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
