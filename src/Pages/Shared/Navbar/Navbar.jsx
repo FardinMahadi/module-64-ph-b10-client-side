@@ -50,7 +50,7 @@ const Navbar = () => {
         <Link to="/secret">Secret</Link>
       </li>
       <li>
-        <Link to="/">
+        <Link to="/dashboard/cart">
           <Badge color="secondary" badgeContent={cart.length} showZero>
             <FaShoppingCart className="mr-2" />
           </Badge>
@@ -99,10 +99,13 @@ const Navbar = () => {
               {navOptions}
             </ul>
           </div>
-          <a className="uppercase font-cinzel flex flex-col items-center p-2">
+          <Link
+            to="/"
+            className="uppercase font-cinzel flex flex-col items-center p-2"
+          >
             <span className="text-2xl font-bold">Bistro Boss</span>
             <span className="text-xl">Restaurant</span>
-          </a>
+          </Link>
         </div>
         {/* large screen */}
         <div className="navbar-center hidden lg:flex">
