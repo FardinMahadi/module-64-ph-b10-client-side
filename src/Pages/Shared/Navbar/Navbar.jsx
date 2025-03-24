@@ -2,9 +2,13 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../provider/AuthProvider";
 import Swal from "sweetalert2";
+import { FaShoppingCart } from "react-icons/fa";
+import { Badge } from "@mui/material";
+import useCart from "../../../Hooks/useCart";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [cart] = useCart();
 
   const handleLogOut = () => {
     logOut()
@@ -45,11 +49,20 @@ const Navbar = () => {
       <li>
         <Link to="/secret">Secret</Link>
       </li>
+      <li>
+        <Link to="/">
+          <Badge color="secondary" badgeContent={cart.length} showZero>
+            <FaShoppingCart className="mr-2" />
+          </Badge>
+        </Link>
+      </li>
 
       {user ? (
-        <li onClick={handleLogOut}>
-          <Link>Log Out</Link>
-        </li>
+        <>
+          <li onClick={handleLogOut}>
+            <Link>Log Out</Link>
+          </li>
+        </>
       ) : (
         <li>
           <Link to="/login">Login</Link>
@@ -60,7 +73,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="navbar sm:fixed z-10 sm:bg-black sm:bg-opacity-30 sm:text-white max-w-screen-xl">
+      <div className="navbar sm:fixed z-50 sm:bg-black sm:bg-opacity-30 sm:text-white max-w-screen-xl">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

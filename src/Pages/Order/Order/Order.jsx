@@ -20,6 +20,7 @@ const Order = () => {
   const pizza = menu.filter((item) => item.category === "pizza");
   const desserts = menu.filter((item) => item.category === "dessert");
   const drinks = menu.filter((item) => item.category === "drinks");
+
   return (
     <div>
       <Helmet>
@@ -35,7 +36,7 @@ const Order = () => {
         <Tabs selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
           <TabList className="flex gap-10 mb-10 items-center justify-center">
             <Tab
-              className={`uppercase font-semibold pb-2 ${
+              className={`uppercase font-semibold pb-2 cursor-pointer ${
                 tabIndex === 0
                   ? "text-orange-500 border-b-2 border-orange-500"
                   : ""
@@ -44,7 +45,7 @@ const Order = () => {
               Salad
             </Tab>
             <Tab
-              className={`uppercase font-semibold pb-2 ${
+              className={`uppercase font-semibold pb-2 cursor-pointer ${
                 tabIndex === 1
                   ? "text-orange-500 border-b-2 border-orange-500"
                   : ""
@@ -53,7 +54,7 @@ const Order = () => {
               Pizza
             </Tab>
             <Tab
-              className={`uppercase font-semibold pb-2 ${
+              className={`uppercase font-semibold pb-2 cursor-pointer ${
                 tabIndex === 2
                   ? "text-orange-500 border-b-2 border-orange-500"
                   : ""
@@ -62,7 +63,7 @@ const Order = () => {
               Soups
             </Tab>
             <Tab
-              className={`uppercase font-semibold pb-2 ${
+              className={`uppercase font-semibold pb-2 cursor-pointer ${
                 tabIndex === 3
                   ? "text-orange-500 border-b-2 border-orange-500"
                   : ""
@@ -71,7 +72,7 @@ const Order = () => {
               Desserts
             </Tab>
             <Tab
-              className={`uppercase font-semibold pb-2 ${
+              className={`uppercase font-semibold pb-2 cursor-pointer ${
                 tabIndex === 4
                   ? "text-orange-500 border-b-2 border-orange-500"
                   : ""
