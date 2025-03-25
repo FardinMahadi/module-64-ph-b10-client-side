@@ -17,10 +17,6 @@ const AllUsers = () => {
     },
   });
 
-  /**
-   * Handle making a user admin
-   * @param {Object} user - The user object to be promoted to admin
-   */
   const handleMakeAdmin = (user) => {
     // Send PATCH request to update user role
     axiosSecure.patch(`/users/admin/${user._id}`).then((res) => {
@@ -39,10 +35,6 @@ const AllUsers = () => {
     });
   };
 
-  /**
-   * Handle deleting a user
-   * @param {Object} user - The user object to be deleted
-   */
   const handleDeleteUser = (user) => {
     // Show confirmation dialog
     Swal.fire({

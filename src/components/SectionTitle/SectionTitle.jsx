@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const SectionTitle = ({ heading, subHeading }) => {
   return (
@@ -17,7 +17,7 @@ const SectionTitle = ({ heading, subHeading }) => {
 
 SectionTitle.propTypes = {
   heading: PropTypes.string.isRequired,
-  subHeading: PropTypes.string.isRequired
+  subHeading: PropTypes.string.isRequired,
 };
 
 export default SectionTitle;
