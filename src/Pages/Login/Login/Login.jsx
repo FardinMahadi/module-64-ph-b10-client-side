@@ -6,13 +6,12 @@ import {
   LoadCanvasTemplate,
   validateCaptcha,
 } from "react-simple-captcha";
-import { useContext, useEffect, useRef, useState } from "react";
-import { FaFacebookF, FaGithub } from "react-icons/fa";
-import { FcGoogle } from "react-icons/fc";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../provider/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+import ExtraAuth from "../../../components/ExtraAuth/ExtraAuth";
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
@@ -130,22 +129,7 @@ const Login = () => {
               </fieldset>
             </form>
 
-            <div className="grid gap-2 grid-cols-3 w-11/12 mx-auto">
-              {/* Google */}
-              <button className="btn bg-white text-black border-[#e5e5e5] ">
-                <FcGoogle />
-              </button>
-
-              {/* Facebook */}
-              <button className="btn bg-[#1A77F2] text-white border-[#005fd8]">
-                <FaFacebookF />
-              </button>
-
-              {/* GitHub */}
-              <button className="btn bg-black text-white border-black">
-                <FaGithub />
-              </button>
-            </div>
+            <ExtraAuth></ExtraAuth>
 
             {/* Redirect to Sign In Page */}
             <div className="text-center mt-4">

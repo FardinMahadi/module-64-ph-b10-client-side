@@ -2,10 +2,10 @@ import Swal from "sweetalert2";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import useCart from "../../../Hooks/useCart";
 import { MdDelete } from "react-icons/md";
-import useAxios from "../../../Hooks/useAxios";
+import useAxiosSecure from "../../../Hooks/useAxios";
 
 const Cart = () => {
-  const axiosSecure = useAxios();
+  const axiosSecure = useAxiosSecure();
 
   const [cart, refetch] = useCart();
   const totalPrice = cart
@@ -38,7 +38,7 @@ const Cart = () => {
   };
 
   return (
-    <div className="mt-10 flex flex-col justify-center">
+    <div className="mt-10 flex flex-col justify-center max-h-screen">
       <SectionTitle heading="WANNA ADD MORE?" subHeading="My Cart" />
       <div className="font-cinzel flex items-center justify-evenly mb-8">
         <h2 className="text-xl">Items: {cart.length}</h2>
@@ -46,11 +46,11 @@ const Cart = () => {
         <button className="btn bg-yellow-500">Pay</button>
       </div>
 
-      <div>
-        <div className="max-h-[500px] overflow-auto">
+      <div className="overflow-x-auto">
+        <div className="h-[calc(100vh-200px)] overflow-y-auto">
           <table className="table table-pin-rows">
             {/* head */}
-            <thead className="bg-[#D1A054]">
+            <thead className="bg-[#D1A054] text-white">
               <tr className="uppercase">
                 <th></th>
                 <th>Item image</th>
@@ -66,8 +66,9 @@ const Cart = () => {
                     <td>{idx + 1}</td>
                     <td>
                       <img
-                        className="h-14 aspect-square object-cover rounded-md"
+                        className="aspect-square rounded-md h-16 object-cover"
                         src={item.image}
+                        alt={item.name}
                       />
                     </td>
                     <td className="text-xl">{item.name}</td>

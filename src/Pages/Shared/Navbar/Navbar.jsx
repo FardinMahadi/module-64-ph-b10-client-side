@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../../provider/AuthProvider";
 import Swal from "sweetalert2";
 import { FaShoppingCart } from "react-icons/fa";
@@ -38,34 +38,74 @@ const Navbar = () => {
   const navOptions = (
     <>
       <li>
-        <Link to="/">Home</Link>
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive ? "text-yellow-500 font-bold" : ""
+          }
+        >
+          Home
+        </NavLink>
       </li>
       <li>
-        <Link to="/menu">Our Menu</Link>
+        <NavLink
+          to="/menu"
+          className={({ isActive }) =>
+            isActive ? "text-yellow-500 font-bold" : ""
+          }
+        >
+          Our Menu
+        </NavLink>
       </li>
       <li>
-        <Link to="/order/salad">Order Food</Link>
+        <NavLink
+          to="/order/salad"
+          className={({ isActive }) =>
+            isActive ? "text-yellow-500 font-bold" : ""
+          }
+        >
+          Order Food
+        </NavLink>
       </li>
       <li>
-        <Link to="/secret">Secret</Link>
+        <NavLink
+          to="/secret"
+          className={({ isActive }) =>
+            isActive ? "text-yellow-500 font-bold" : ""
+          }
+        >
+          Secret
+        </NavLink>
       </li>
       <li>
-        <Link to="/dashboard/cart">
+        <NavLink
+          to="/dashboard/cart"
+          className={({ isActive }) =>
+            isActive ? "text-yellow-500 font-bold" : ""
+          }
+        >
           <Badge color="secondary" badgeContent={cart.length} showZero>
             <FaShoppingCart className="mr-2" />
           </Badge>
-        </Link>
+        </NavLink>
       </li>
 
       {user ? (
         <>
           <li onClick={handleLogOut}>
-            <Link>Log Out</Link>
+            <NavLink>Log Out</NavLink>
           </li>
         </>
       ) : (
         <li>
-          <Link to="/login">Login</Link>
+          <NavLink
+            to="/login"
+            className={({ isActive }) =>
+              isActive ? "text-yellow-500 font-bold" : ""
+            }
+          >
+            Login
+          </NavLink>
         </li>
       )}
     </>
@@ -99,13 +139,13 @@ const Navbar = () => {
               {navOptions}
             </ul>
           </div>
-          <Link
+          <NavLink
             to="/"
             className="uppercase font-cinzel flex flex-col items-center p-2"
           >
             <span className="text-2xl font-bold">Bistro Boss</span>
             <span className="text-xl">Restaurant</span>
-          </Link>
+          </NavLink>
         </div>
         {/* large screen */}
         <div className="navbar-center hidden lg:flex">

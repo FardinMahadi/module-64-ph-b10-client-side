@@ -1,16 +1,17 @@
 import bgTexture from "../../../assets/reservation/wood-grain-pattern-gray1x.png";
 import authPng from "../../../assets/others/authentication2.png";
 
-import { FaFacebookF, FaGithub } from "react-icons/fa";
-import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import { useContext } from "react";
 import { AuthContext } from "../../../provider/AuthProvider";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import ExtraAuth from "../../../components/ExtraAuth/ExtraAuth";
 
 const SignUp = () => {
+  const axiosPublic = useAxiosPublic();
   const {
     register,
     handleSubmit,
@@ -21,22 +22,31 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    console.log(data);
     createUser(data.email, data.password).then((result) => {
       const loggedUser = result.user;
       console.log(loggedUser);
       updateUserProfile(data.name, data.photoURL)
         .then(() => {
-          console.log("user profile info updated");
-          reset();
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "User profile updated",
-            showConfirmButton: false,
-            timer: 1500,
+          // create user entry in the database
+          const userInfo = {
+            name: data.name,
+            email: data.email,
+            photoURL: data.photoURL,
+          };
+          axiosPublic.post("/users", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              console.log("user added to the database");
+              reset();
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "User profile updated",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              navigate("/");
+            }
           });
-          navigate("/");
         })
         .catch((err) => {
           console.log(err);
@@ -150,22 +160,7 @@ const SignUp = () => {
               </fieldset>
             </form>
 
-            <div className="grid gap-2 grid-cols-3 w-11/12 mx-auto">
-              {/* Google */}
-              <button className="btn bg-white text-black border-[#e5e5e5] ">
-                <FcGoogle />
-              </button>
-
-              {/* Facebook */}
-              <button className="btn bg-[#1A77F2] text-white border-[#005fd8]">
-                <FaFacebookF />
-              </button>
-
-              {/* GitHub */}
-              <button className="btn bg-black text-white border-black">
-                <FaGithub />
-              </button>
-            </div>
+            <ExtraAuth></ExtraAuth>
 
             {/* Redirect to Login Page */}
             <div className="text-center mt-4">
