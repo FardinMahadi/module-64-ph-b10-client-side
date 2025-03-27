@@ -12,9 +12,11 @@ import {
 } from "react-icons/fa";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../Hooks/useAdmin";
+import useCart from "../Hooks/useCart";
 
 const Dashboard = () => {
   const [isAdmin] = useAdmin();
+  const [cart] = useCart();
   // console.log(isAdmin);
 
   return (
@@ -163,7 +165,7 @@ const Dashboard = () => {
                   }`
                 }
               >
-                <FaShoppingCart /> My Cart
+                <FaShoppingCart /> My Cart({cart.length})
               </NavLink>
             </li>
             <li>

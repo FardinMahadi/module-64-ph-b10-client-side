@@ -26,6 +26,7 @@ const ManageItem = () => {
       if (result.isConfirmed) {
         try {
           const res = await axiosSecure.delete(`/menu/${item._id}`);
+          console.log(res.data);
           if (res.data.deletedCount > 0) {
             refetch();
             Swal.fire({
@@ -54,7 +55,7 @@ const ManageItem = () => {
         </h2>
 
         <div className="overflow-x-auto max-h-[calc(100vh-200px)] w-full">
-          <table className="table w-[800px] min-w-full table-pin-rows">
+          <table className="table w-[800px] min-w-full table-pin-rows table-zebra">
             {/* head */}
             <thead className="">
               <tr className="bg-[#D1A054] text-white uppercase">
