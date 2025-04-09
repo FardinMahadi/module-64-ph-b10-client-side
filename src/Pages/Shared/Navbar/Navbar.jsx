@@ -1,13 +1,14 @@
-import { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import { AuthContext } from "../../../provider/AuthProvider";
 import Swal from "sweetalert2";
 import { FaShoppingCart } from "react-icons/fa";
 import { Badge } from "@mui/material";
 import useCart from "../../../Hooks/useCart";
+import useAuth from "../../../Hooks/useAuth";
+import useAdmin from "../../../Hooks/useAdmin";
 
 const Navbar = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut } = useAuth();
+  const [isAdmin] = useAdmin();
   const [cart] = useCart();
 
   const handleLogOut = () => {
@@ -67,16 +68,30 @@ const Navbar = () => {
           Order Food
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/secret"
-          className={({ isActive }) =>
-            isActive ? "text-yellow-500 font-bold" : ""
-          }
-        >
-          Secret
-        </NavLink>
-      </li>
+      {user && isAdmin && (
+        <li>
+          <NavLink
+            to="/dashboard/admin-home"
+            className={({ isActive }) =>
+              isActive ? "text-yellow-500 font-bold" : ""
+            }
+          >
+            Dashboard
+          </NavLink>
+        </li>
+      )}
+      {user && !isAdmin && (
+        <li>
+          <NavLink
+            to="/dashboard/user-home"
+            className={({ isActive }) =>
+              isActive ? "text-yellow-500 font-bold" : ""
+            }
+          >
+            Dashboard
+          </NavLink>
+        </li>
+      )}
       <li>
         <NavLink
           to="/dashboard/cart"

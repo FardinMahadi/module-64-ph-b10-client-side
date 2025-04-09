@@ -17,6 +17,8 @@ import ManageItem from "../Pages/Dashboard/ManageItem/ManageItem";
 import UpdateItem from "../Pages/Dashboard/UpdateItem/UpdateItem";
 import Payment from "../Pages/Dashboard/Payment/Payment";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
+import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
+import UserHome from "../Pages/Dashboard/UserHome/UserHome";
 
 export const router = createBrowserRouter([
   {
@@ -64,6 +66,10 @@ export const router = createBrowserRouter([
     children: [
       // normal user routes
       {
+        path: "user-home",
+        element: <UserHome></UserHome>,
+      },
+      {
         path: "cart",
         element: <Cart></Cart>,
       },
@@ -86,6 +92,14 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "admin-home",
+        element: (
+          <AdminRoute>
+            <AdminHome></AdminHome>
+          </AdminRoute>
+        ),
+      },
+      {
         path: "manage-items",
         element: (
           <AdminRoute>
@@ -101,7 +115,9 @@ export const router = createBrowserRouter([
           </AdminRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/menu/${params.id}`),
+          fetch(
+            `https://bistro-boss-server-six-tawny-93.vercel.app/menu/${params.id}`
+          ),
       },
       {
         path: "all-users",
